@@ -1,6 +1,5 @@
-// src/index.ts
 import express from "express";
-import { userController } from "./src/interfaces/controllers/userController";
+import { userRouter } from "./src/interfaces/routes/userRoutes";
 import { errorHandler } from "./src/utils/errorHandler";
 
 const app = express();
@@ -9,7 +8,7 @@ const PORT = 3000;
 app.use(express.json());
 
 // User routes
-app.use("/", userController());
+app.use("/", userRouter);
 
 app.use(errorHandler);
 

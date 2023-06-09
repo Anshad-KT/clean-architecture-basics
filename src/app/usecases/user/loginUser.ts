@@ -6,6 +6,6 @@ export const loginUser = (userRepository: UserRepository) => async (email: strin
   const user = await userRepository.findByEmail(email);
   if (user && user.password === password) {
     return user;
-  }
+  };
   return null;
 };

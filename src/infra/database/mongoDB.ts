@@ -1,16 +1,6 @@
-// src/infra/database/mongoDB.ts
-export type MongoDB = {
-    collection: (name: string) => {
-      findOne: (query: any) => Promise<any>;
-      insertOne: (data: any) => Promise<any>;
-    };
-  };
-  
-  // Example MongoDB connection code
-  export const MongoDBImpl: MongoDB = {
-    collection: (name: string) => ({
-      findOne: async (query: any) => null,
-      insertOne: async (data: any) => ({ ops: [data] }),
-    }),
-  };
-  
+import mongoose, { Collection, Document, Model, Schema } from 'mongoose';
+
+export type MongoDB = mongoose.Collection<Document>;
+
+// Example MongoDB connection code
+export const MongoDBImpl: MongoDB = mongoose.connection.collection('your_collection_name');

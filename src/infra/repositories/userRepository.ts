@@ -1,27 +1,38 @@
-// src/infra/repositories/userRepository.ts
-import { MongoDB } from "../database/mongoDB";
-import { User } from "../../domain/models/user";
+import { Model } from 'mongoose';
+import { User } from '../../domain/models/user';
 
 export type UserRepository = {
   findByEmail: (email: string) => Promise<User | null>;
   create: (user: User) => Promise<User>;
+  find: () => Promise<User[]>;
+  findOne: (user:User) => Promise<User | null>
 };
 
-export const UserRepositoryImpl = (db: MongoDB): UserRepository => {
+export const UserRepositoryImpl = (UserModel: Model<Document & User>): UserRepository => {
   const findByEmail = async (email: string): Promise<User | null> => {
-    // Logic to find a user by email in the database
-    const user = await db.collection("users").findOne({ email });
-    return user ? user : null;
+    const user = await UserModel.findOne({ email });
+    return user ? user.toObject() : null;
   };
 
   const create = async (user: User): Promise<User> => {
-    // Logic to create a new user in the database
-    const createdUser = await db.collection("users").insertOne(user);
-    return createdUser.ops[0];
+    const createdUser = await UserModel.create(user);
+    return createdUser.toObject();
+  };
+
+  const find = async (): Promise<User[]> => {
+    const allUsers = await UserModel.find();
+    return allUsers.map((user) => user.toObject());
+  };
+
+  const findOne = async (user:User):Promise<User | null> => {
+    const currentUser = await UserModel.findOne(user);
+    return currentUser ? currentUser.toObject() : null;
   };
 
   return {
     findByEmail,
     create,
+    find,
+    findOne
   };
 };
