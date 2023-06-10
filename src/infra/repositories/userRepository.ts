@@ -1,5 +1,6 @@
-import { Model } from 'mongoose';
+import { Model, Document } from 'mongoose';
 import { User } from '../../domain/models/user';
+import { MongoDBUser } from '../database/mongoDB';
 
 export type UserRepository = {
   findByEmail: (email: string) => Promise<User | null>;
@@ -8,7 +9,7 @@ export type UserRepository = {
   findOne: (user:User) => Promise<User | null>
 };
 
-export const UserRepositoryImpl = (UserModel: Model<Document & User>): UserRepository => {
+export const UserRepositoryImpl = (UserModel: MongoDBUser): UserRepository => {
   const findByEmail = async (email: string): Promise<User | null> => {
     const user = await UserModel.findOne({ email });
     return user ? user.toObject() : null;
