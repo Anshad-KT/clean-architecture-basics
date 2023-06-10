@@ -7,6 +7,7 @@ export const signupUser = (userRepository: UserRepository) => async (email: stri
     email,
     password,
   };
+  
   const createdUser = await userRepository.create(newUser);
   return createdUser;
 };
