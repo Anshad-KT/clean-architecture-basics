@@ -3,7 +3,7 @@ import { loginUser } from "../../app/usecases/user/loginUser";
 import { oneUser } from "../../app/usecases/user/fetchOneUser";
 import { signupUser } from "../../app/usecases/user/signupUser";
 import { UserRepositoryImpl } from "../../infra/repositories/userRepository";
-import { userModel } from "../../infra/database/mongoDB";
+import { userModel } from "../../infra/database/userModel";
 import { alluser } from "../../app/usecases/user/fetchUsers";
 
 const db = userModel; // Instantiate MongoDB connection

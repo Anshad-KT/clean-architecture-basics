@@ -1,6 +1,6 @@
 import { Model, Document } from 'mongoose';
 import { admin } from '../../domain/models/admin';
-import { MongoDBAdmin } from '../database/mongoDB';
+import { MongoDBAdmin } from '../database/adminModel';
 
 export type adminRepository = {
   find: (email: string, password: string) => Promise<admin | null | false>;

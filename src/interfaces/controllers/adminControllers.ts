@@ -2,7 +2,7 @@
 // src/interfaces/controllers/userControllers.ts
 import { Request, Response } from "express";
 import { adminRepository, AdminRepositoryImpl } from "../../infra/repositories/adminRepository";
-import { adminModel } from "../../infra/database/mongoDB";
+import { adminModel } from "../../infra/database/adminModel";
 
 
 

@@ -1,6 +1,6 @@
 import { Model, Document } from 'mongoose';
 import { User } from '../../domain/models/user';
-import { MongoDBUser } from '../database/mongoDB';
+import { MongoDBUser } from '../database/userModel';
 
 export type UserRepository = {
   findByEmail: (email: string) => Promise<User | null>;
